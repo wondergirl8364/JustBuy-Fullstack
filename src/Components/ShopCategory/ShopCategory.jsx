@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./ShopCategory.css";
 import Item from "../Item/Item";
 import { ToastContainer } from "react-toastify";
+import API_BASE_URL from '../../config';
 
 const ShopCategory = ({ category, banner, searchQuery }) => {
   const [products, setProducts] = useState([]);
@@ -27,13 +28,13 @@ const ShopCategory = ({ category, banner, searchQuery }) => {
   // ✅ Fetch products and their images
   const fetchProductsByCategory = async (categoryId) => {
     try {
-      const res = await fetch(`https://wdm-backend.onrender.com/api/products/category/${categoryId}`);
+      const res = await fetch(`${API_BASE_URL}/api/products/category/${categoryId}`);
       const data = await res.json();
 
       const enriched = await Promise.all(
         data.map(async (product) => {
           try {
-            const imgRes = await fetch(`https://wdm-backend.onrender.com/api/products/images/${product.Product_ID}`);
+            const imgRes = await fetch(`${API_BASE_URL}/api/products/images/${product.Product_ID}`);
             const imgData = await imgRes.json();
             const firstImage = imgData.images?.[0] || null;
 

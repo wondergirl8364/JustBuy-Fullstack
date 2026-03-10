@@ -1,7 +1,7 @@
 {
   "name": "ecommercereactjs",
   "version": "0.1.0",
-  "homepage": "https://dxs8368.uta.cloud/WDM_Team8/",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "axios": "^1.8.4",

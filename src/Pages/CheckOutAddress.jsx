@@ -3,6 +3,7 @@ import "../Styles/CheckOutAddress.css";
 import CheckOutItems from "../Components/CheckOutItems/CheckOutItems";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import API_BASE_URL from '../config';
 
 const CheckOutAddress = () => {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ const CheckOutAddress = () => {
     };
 
     try {
-      const res = await fetch("https://wdm-backend.onrender.com/api/shipping", {
+      const res = await fetch(`${API_BASE_URL}/api/shipping`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

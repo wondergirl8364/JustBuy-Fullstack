@@ -32,6 +32,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import '../Styles/Favorites.css';
 import FavItem from '../Components/FavItem/FavItem';
 import { ShopContext } from '../Context/ShopContext';
+import API_BASE_URL from '../config';
 
 const Favorites = () => {
   const { favorites } = useContext(ShopContext);
@@ -42,7 +43,7 @@ const Favorites = () => {
       const enriched = await Promise.all(
         favorites.map(async (item) => {
           try {
-            const res = await fetch(`https://wdm-backend.onrender.com/api/products/images/${item.Product_ID}`);
+            const res = await fetch(`${API_BASE_URL}/api/products/images/${item.Product_ID}`);
             const data = await res.json();
             const firstImage = data.images?.[0] || null;
 

@@ -28,6 +28,7 @@
 import React, { useEffect, useState } from 'react';
 import './NewCollections.css';
 import Item from '../Item/Item';
+import API_BASE_URL from '../../config';
 
 const NewCollections = () => {
   const [newCollection, setNewCollection] = useState([]);
@@ -39,7 +40,7 @@ const NewCollections = () => {
         const allProducts = [];
 
         for (const catId of categories) {
-          const res = await fetch(`https://wdm-backend.onrender.com/api/products/category/${catId}`);
+          const res = await fetch(`${API_BASE_URL}/api/products/category/${catId}`);
           const data = await res.json();
           allProducts.push(...data);
         }
@@ -47,7 +48,7 @@ const NewCollections = () => {
         const top8 = allProducts.slice(0, 8);
 
         const enriched = await Promise.all(top8.map(async (product) => {
-          const imgRes = await fetch(`https://wdm-backend.onrender.com/api/products/images/${product.Product_ID}`);
+          const imgRes = await fetch(`${API_BASE_URL}/api/products/images/${product.Product_ID}`);
           const imgData = await imgRes.json();
           return {
             ...product,

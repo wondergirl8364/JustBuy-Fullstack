@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../AdminDashboard/AdminDashboard.css";
 import axios from "axios";
+import API_BASE_URL from '../../config';
 
 const AdminDashboard = () => {
   const [categories] = useState([
@@ -41,7 +42,7 @@ const AdminDashboard = () => {
 
   const handleSendNotification = async () => {
     try {
-      const res = await axios.post("https://wdm-backend.onrender.com/api/auth/offer-notifications", {
+      const res = await axios.post(`${API_BASE_URL}/api/auth/offer-notifications`, {
         message,
       });
       if (res.data.success) {
@@ -63,7 +64,7 @@ const AdminDashboard = () => {
 
   const fetchSellers = async () => {
     try {
-      const res = await axios.get("https://wdm-backend.onrender.com/api/sellers");
+      const res = await axios.get(`${API_BASE_URL}/api/sellers`);
       setSellers(res.data);
     } catch (err) {
       console.error("Error fetching sellers", err);
@@ -72,7 +73,7 @@ const AdminDashboard = () => {
 
   const handleAddSeller = async () => {
     try {
-      const res = await axios.post("https://wdm-backend.onrender.com/api/sellers", newSeller);
+      const res = await axios.post(`${API_BASE_URL}/api/sellers`, newSeller);
       alert("Seller added successfully!");
       setNewSeller({ User_ID: 1, Store_Name: "", Store_Description: "", Contact_Number: "", Rating: "" });
       setShowNewSellerForm(false);
@@ -98,7 +99,7 @@ const AdminDashboard = () => {
         Stock_Quantity: parseInt(product.Stock_Quantity),
       };
 
-      const res = await axios.post("https://wdm-backend.onrender.com/api/products", payload);
+      const res = await axios.post(`${API_BASE_URL}/api/products`, payload);
       setCreatedProductId(res.data.Product_ID || res.data.productId);
       alert("Product added successfully!");
     } catch (err) {
@@ -113,7 +114,7 @@ const AdminDashboard = () => {
       formData.append("Color", uploadColor);
       formData.append("image", uploadedImage);
 
-      await axios.post("https://wdm-backend.onrender.com/api/products/upload-image", formData);
+      await axios.post(`${API_BASE_URL}/api/products/upload-image`, formData);
       alert("Image uploaded successfully!");
     } catch (err) {
       console.error("Error uploading image", err);

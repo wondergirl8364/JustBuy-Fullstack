@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import '../Components/ComplementaryProducts.css';
 import Item from "../Components/Item/Item";
 import axios from "axios";
+import API_BASE_URL from '../config';
 
 const ComplementaryProducts = ({ productId }) => {
   const [suggestedProducts, setSuggestedProducts] = useState([]);
-  const BASE_URL = "https://wdm-backend.onrender.com";
 
   useEffect(() => {
     const fetchComplementary = async () => {
       if (!productId) return;
 
       try {
-        const res = await axios.get(`${BASE_URL}/api/products/${productId}/complementary`);
+        const res = await axios.get(`${API_BASE_URL}/api/products/${productId}/complementary`);
         setSuggestedProducts(res.data);
       } catch (err) {
         console.error("Failed to fetch complementary products:", err.message);

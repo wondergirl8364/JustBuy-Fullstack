@@ -39,17 +39,17 @@ import React, { useEffect, useState } from "react";
 import './RelatedProducts.css';
 import Item from "../Item/Item";
 import axios from "axios";
+import API_BASE_URL from '../../config';
 
 const RelatedProducts = ({ productId }) => {
   const [relatedProducts, setRelatedProducts] = useState([]);
-  const BASE_URL = "https://wdm-backend.onrender.com"; // Adjust if needed
 
   useEffect(() => {
     const fetchRelatedProducts = async () => {
       if (!productId) return; // No product selected
 
       try {
-        const res = await axios.get(`${BASE_URL}/api/products/${productId}/related`);
+        const res = await axios.get(`${API_BASE_URL}/api/products/${productId}/related`);
         setRelatedProducts(res.data);
       } catch (err) {
         console.error("Failed to fetch related products:", err.message);

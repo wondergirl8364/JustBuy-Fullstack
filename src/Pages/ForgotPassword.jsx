@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../Styles/ForgotPassword.css";
+import API_BASE_URL from '../config';
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState("");
@@ -10,7 +11,7 @@ const ForgotPassword = () => {
 
     const handleForgotPassword = async () => {
         try {
-            const response = await axios.post("https://wdm-backend.onrender.com/api/auth/forgot-password", { email });
+            const response = await axios.post(`${API_BASE_URL}/api/auth/forgot-password`, { email });
             console.log('response: ',response)
             alert(response.data.message);
         } catch (error) {

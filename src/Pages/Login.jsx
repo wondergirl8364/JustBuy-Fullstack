@@ -92,6 +92,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Styles/Login.css";
 import { AuthContext } from "../Context/AuthContext";
+import API_BASE_URL from '../config';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -111,7 +112,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("https://wdm-backend.onrender.com/api/auth/login", {
+      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
