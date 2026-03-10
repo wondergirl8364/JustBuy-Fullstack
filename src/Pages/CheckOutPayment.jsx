@@ -105,6 +105,7 @@ import PayPal from "../Components/Assets/PayPal.png";
 import { ShopContext } from "../Context/ShopContext";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from 'jwt-decode';
+import API_BASE_URL from '../config';
 
 const CheckOutPayment = () => {
   const [paymentMethod, setPaymentMethod] = useState("credit");
@@ -167,7 +168,7 @@ const CheckOutPayment = () => {
     });
 
     try {
-      const shippingResponse = await fetch(`https://wdm-backend.onrender.com/api/shipping/${userId}`);
+      const shippingResponse = await fetch(`${API_BASE_URL}/api/shipping/${userId}`);
       const shippingData = await shippingResponse.json();
 
       if (!shippingData.Shipping_ID) {
@@ -175,7 +176,7 @@ const CheckOutPayment = () => {
         return;
       }
 
-      const orderRes = await fetch("https://wdm-backend.onrender.com/api/orders", {
+      const orderRes = await fetch(`${API_BASE_URL}/api/orders`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

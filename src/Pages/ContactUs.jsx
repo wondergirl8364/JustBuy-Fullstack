@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../Styles/ContactUs.css";
+import API_BASE_URL from '../config';
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ const ContactUs = () => {
     const { name, email, phone, message } = formData;
 
     try {
-      const res = await fetch("https://wdm-backend.onrender.comapi/auth/send-enquiry", {
+      const res = await fetch(`${API_BASE_URL}/api/auth/send-enquiry`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

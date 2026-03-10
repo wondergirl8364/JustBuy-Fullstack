@@ -24,6 +24,7 @@
 import React, { useEffect, useState } from 'react';
 import './Popular.css';
 import Item from '../Item/Item';
+import API_BASE_URL from '../../config';
 
 const Popular = () => {
   const [popularProducts, setPopularProducts] = useState([]);
@@ -31,10 +32,10 @@ const Popular = () => {
   useEffect(() => {
     const fetchPopular = async () => {
       try {
-        const res = await fetch("https://wdm-backend.onrender.com/api/products/category/2"); // women category
+        const res = await fetch(`${API_BASE_URL}/api/products/category/2`); // women category
         const data = await res.json();
         const enriched = await Promise.all(data.slice(0, 4).map(async (product) => {
-          const imgRes = await fetch(`https://wdm-backend.onrender.com/api/products/images/${product.Product_ID}`);
+          const imgRes = await fetch(`${API_BASE_URL}/api/products/images/${product.Product_ID}`);
           const imgData = await imgRes.json();
           return {
             ...product,

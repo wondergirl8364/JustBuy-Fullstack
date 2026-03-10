@@ -5,6 +5,7 @@ import favoriteIcon from "../Assets/unfilled-favIcon.svg";
 import favoriteFilledIcon from "../Assets/filled-heart.svg";
 import { ShopContext } from '../../Context/ShopContext';
 import { jwtDecode } from 'jwt-decode';
+import API_BASE_URL from '../../config';
 
 const Item = ({ id, name, image, new_price, old_price }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -36,8 +37,8 @@ const Item = ({ id, name, image, new_price, old_price }) => {
     if (isFavorited) {
       removeFromFavorites(id);
       try {
-        await fetch('https://wdm-backend.onrender.com/api/favourites', {
-          method: 'DELETE',
+                await fetch(`${API_BASE_URL}/api/favourites`, {
+                  method: 'DELETE',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ User_ID: userId, Product_ID: id }),
         });
@@ -47,8 +48,8 @@ const Item = ({ id, name, image, new_price, old_price }) => {
     } else {
       addToFavorites(id);
       try {
-        await fetch('https://wdm-backend.onrender.com/api/favourites', {
-          method: 'POST',
+                await fetch(`${API_BASE_URL}/api/favourites`, {
+                  method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ User_ID: userId, Product_ID: id }),
         });

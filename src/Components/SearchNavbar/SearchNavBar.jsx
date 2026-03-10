@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ShopContext } from '../../Context/ShopContext';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
+import API_BASE_URL from '../../config';
 
 export const SearchNavBar = () => {
     const [menu, setMenu] = useState("shop");
@@ -60,9 +61,7 @@ export const SearchNavBar = () => {
     
         try {
             const token = localStorage.getItem("token");
-            const BASE_URL = "https://wdm-backend.onrender.com";
-    
-            const searchRes = await axios.post(`${BASE_URL}/api/search`, {
+            const searchRes = await axios.post(`${API_BASE_URL}/api/search`, {
                 userId,
                 searchQuery: cleanQuery
             }, {
@@ -82,32 +81,32 @@ export const SearchNavBar = () => {
             const enrichedSearchResults = await Promise.all(
                 searchData.map(async (product) => {
                     try {
-                        const imgRes = await axios.get(`${BASE_URL}/api/products/images/${product.Product_ID}`);
-                        const firstImage = imgRes.data.images?.[0] || null;
-                        return { ...product, Image_URL: firstImage };
-                    } catch (err) {
-                        console.error(`Error fetching image for product ${product.Product_ID}`, err);
-                        return { ...product, Image_URL: null };
-                    }
-                })
-            );
+                                    const imgRes = await axios.get(`${API_BASE_URL}/api/products/images/${product.Product_ID}`);
+                                    const firstImage = imgRes.data.images?.[0] || null;
+                                    return { ...product, Image_URL: firstImage };
+                                } catch (err) {
+                                    console.error(`Error fetching image for product ${product.Product_ID}`, err);
+                                    return { ...product, Image_URL: null };
+                                }
+                            })
+                        );
     
-            // 🔥 Always fetch recommended products
-            let enrichedRecommendations = [];
-            try {
-                const recRes = await axios.get(`${BASE_URL}/api/recommendations/search/${userId}`, {
+                        // 🔥 Always fetch recommended products
+                        let enrichedRecommendations = [];
+                        try {
+                            const recRes = await axios.get(`${API_BASE_URL}/api/recommendations/search/${userId}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
     
                 enrichedRecommendations = await Promise.all(
                     recRes.data.map(async (product) => {
                         try {
-                            const imgRes = await axios.get(`${BASE_URL}/api/products/images/${product.Product_ID}`);
-                            const firstImage = imgRes.data.images?.[0] || null;
-                            return { ...product, Image_URL: firstImage };
-                        } catch (err) {
-                            console.error(`Error fetching image for product ${product.Product_ID}`, err);
-                            return { ...product, Image_URL: null };
+                                                    const imgRes = await axios.get(`${API_BASE_URL}/api/products/images/${product.Product_ID}`);
+                                                    const firstImage = imgRes.data.images?.[0] || null;
+                                                    return { ...product, Image_URL: firstImage };
+                                                } catch (err) {
+                                                    console.error(`Error fetching image for product ${product.Product_ID}`, err);
+                                                    return { ...product, Image_URL: null };
                         }
                     })
                 );

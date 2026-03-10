@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import favorite_filled from '../Assets/filled-heart.svg';
 import favorite_outline from '../Assets/unfilled-favIcon.svg';
 import { jwtDecode } from 'jwt-decode';
+import API_BASE_URL from '../../config';
 
 const ProductDisplay = () => {
   const { addToCart, addToFavorites, removeFromFavorites, favorites = [] } = useContext(ShopContext);
@@ -42,7 +43,7 @@ const ProductDisplay = () => {
 
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`https://wdm-backend.onrender.com/api/products/${productId}`);
+        const res = await fetch(`${API_BASE_URL}/api/products/${productId}`);
         const data = await res.json();
         console.log(data);
         setProduct(data);
@@ -53,7 +54,7 @@ const ProductDisplay = () => {
         if (sizes.length) setSelectedSize(sizes[0]);
         if (colors.length) setSelectedColor(colors[0]);
 
-        const imgRes = await fetch(`https://wdm-backend.onrender.com/api/products/images/${productId}`);
+        const imgRes = await fetch(`${API_BASE_URL}/api/products/images/${productId}`);
         const imgData = await imgRes.json();
         if (imgData.images && imgData.images.length > 0) {
           setImages(imgData.images);
@@ -82,7 +83,7 @@ const ProductDisplay = () => {
     };
 
     try {
-      const res = await fetch('https://wdm-backend.onrender.com/api/cart', {
+      const res = await fetch(`${API_BASE_URL}/api/cart`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

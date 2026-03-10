@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../Styles/ResetPassword.css";
+import API_BASE_URL from '../config';
 
 const ResetPassword = () => {
     const { resetToken } = useParams();  // Extract the token from the URL
@@ -16,7 +17,7 @@ const ResetPassword = () => {
         const verifyToken = async () => {
             try {
                 // Call the backend to verify the token
-                await axios.get(`https://wdm-backend.onrender.comapi/auth/verify-reset-token/${resetToken}`);
+                await axios.get(`${API_BASE_URL}/api/auth/verify-reset-token/${resetToken}`);
                 setLoading(false); // Token is valid, proceed to allow password reset
             } catch (error) {
                 setLoading(false);
@@ -35,7 +36,7 @@ const ResetPassword = () => {
         }
 
         try {
-            const response = await axios.post("https://wdm-backend.onrender.comapi/auth/reset-password", { resetToken, password });
+            const response = await axios.post(`${API_BASE_URL}/api/auth/reset-password`, { resetToken, password });
             console.log('RESPONSE:',response)
             alert(response.data.message);
             setTimeout(() => navigate("/login"), 2000); // Redirect to login after successful reset

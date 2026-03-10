@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../Styles/AccountSettings.css";
+import API_BASE_URL from '../config';
 
 const AccountSettings = () => {
   const [userData, setUserData] = useState({
@@ -23,7 +24,7 @@ const AccountSettings = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("https://wdm-backend.onrender.com/api/auth/account-settings", {
+        const res = await axios.get(`${API_BASE_URL}/api/auth/account-settings`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUserData((prev) => ({
@@ -66,7 +67,7 @@ const AccountSettings = () => {
 
     try {
       const res = await axios.post(
-        "https://wdm-backend.onrender.com/api/auth/account-settings",
+        `${API_BASE_URL}/api/auth/account-settings`,
         {
           fullName: userData.fullName,
           phone: userData.phone,

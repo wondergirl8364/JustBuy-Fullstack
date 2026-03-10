@@ -37,7 +37,7 @@ function App() {
 
   const [searchQuery, setSearchQuery] = useState("");
   return (
-    <BrowserRouter basename="/WDM_Team8">
+    <BrowserRouter basename={process.env.REACT_APP_BASENAME || "/"}>
       <MainContent searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
     </BrowserRouter>
   );

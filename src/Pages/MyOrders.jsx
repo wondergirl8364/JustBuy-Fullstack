@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./CSS/MyOrders.css";
 import { jwtDecode } from 'jwt-decode';
+import API_BASE_URL from '../config';
 
 const MyOrders = () => {
   const [orders, setOrders] = useState([]);
@@ -26,14 +27,14 @@ const MyOrders = () => {
     if (!userId) return;
     const fetchOrders = async () => {
       try {
-        const ordersRes = await fetch(`https://wdm-backend.onrender.com/api/orders/user/${userId}`);
+        const ordersRes = await fetch(`${API_BASE_URL}/api/orders/user/${userId}`);
         const ordersData = await ordersRes.json();
         setOrders(ordersData);
 
         // Fetch items for each order
         const itemsMap = {};
         for (const order of ordersData) {
-          const itemsRes = await fetch(`https://wdm-backend.onrender.com/api/orders/${order.Order_ID}/items`);
+          const itemsRes = await fetch(`${API_BASE_URL}/api/orders/${order.Order_ID}/items`);
           const itemsData = await itemsRes.json();
           itemsMap[order.Order_ID] = itemsData;
         }

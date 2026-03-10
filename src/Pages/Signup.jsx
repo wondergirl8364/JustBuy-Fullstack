@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Styles/Signup.css";
+import API_BASE_URL from '../config';
 
 export const Signup = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ export const Signup = () => {
 
   const handleSignup = async () => {
     try {
-      const response = await fetch("https://wdm-backend.onrender.com/api/auth/signup", {
+      const response = await fetch(`${API_BASE_URL}/api/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

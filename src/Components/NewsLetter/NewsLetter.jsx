@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './NewsLetter.css'
 import { useNavigate } from 'react-router-dom';
 import axios from "axios"
+import API_BASE_URL from '../../config';
 
 const NewsLetter = () => {
   const [email, setEmail] = useState("");
@@ -12,7 +13,7 @@ const NewsLetter = () => {
   
     if (emailRegex.test(email)) {
       try {
-        await axios.post("https://wdm-backend.onrender.comapi/auth/subscribe", { email });
+        await axios.post(`${API_BASE_URL}/api/auth/subscribe`, { email });
         navigate('/confirmation', { state: { email } });
       } catch (err) {
         console.error("Failed to subscribe:", err);
