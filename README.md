@@ -1,7 +1,9 @@
 # Just Buy - E-Commerce Web Application
 
 ## 📌 Project Overview
-Just Buy is a *React-based e-commerce web application* designed to provide users with a seamless online shopping experience. This project integrates *React Router, a **responsive UI, and a **WordPress-powered blog*.
+Just Buy is a *React-based e-commerce web application* designed to provide users with a seamless online shopping experience. This project integrates React Router, a responsive UI, and a WordPress-powered blog.
+For the frontend code, check the frontend branch.
+For the backend code, check the backend brach.
 
 ## 👥 Team Members
 - Durgashree Hakkinalu Somashekaraiah - 1002197918
